@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Phaser from 'phaser'
+import { IonPhaser } from '@ion-phaser/react'
+import {FirstGame} from "./Games/FirstGame";
+import * as axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = FirstGame
+
+
+    render() {
+        async function getSample(){
+            return await axios.get('http://localhost:8082/')
+        }
+
+        getSample().then(res => console.log(res))
+    const { initialize, game } = this.state
+    return (
+        <div>
+          <h1>HEADER2</h1>
+
+          <div style={{height: "300px"}}>
+            <IonPhaser game={game} initialize={initialize} />
+          </div>
+
+
+          <h1>footer</h1>
+        </div>
+
+    )
+  }
 }
 
 export default App;
